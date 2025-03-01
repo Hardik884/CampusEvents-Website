@@ -1,16 +1,24 @@
-import { firebaseConfig, CLOUD_NAME, UPLOAD_PRESET } from "./config.js";
-
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-const auth = firebase.auth();
-const provider = new firebase.auth.GoogleAuthProvider();
-provider.addScope("profile");
-provider.addScope("email");
-
-// Now you can use CLOUD_NAME and UPLOAD_PRESET
-console.log("Cloudinary Config:", CLOUD_NAME, UPLOAD_PRESET);
+async function loadConfig() {
+    try {
+      const response = await fetch("/api/config");
+      const data = await response.json();
   
+      const firebaseConfig = data.firebaseConfig;
+      const CLOUD_NAME = data.cloudinary.cloudName;
+      const UPLOAD_PRESET = data.cloudinary.uploadPreset;
+  
+      console.log("✅ Config Loaded:", firebaseConfig);
+  
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      
+    } catch (error) {
+      console.error("❌ Error fetching config:", error);
+    }
+  }
+  
+  // Load config on page load
+  document.addEventListener("DOMContentLoaded", loadConfig);
   
   // Theme Toggle
   const themeToggle = document.getElementById("themeToggle")
