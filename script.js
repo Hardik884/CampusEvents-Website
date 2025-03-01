@@ -1,16 +1,26 @@
-import { firebaseConfig, CLOUD_NAME, UPLOAD_PRESET } from "./config.js";
-
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-const auth = firebase.auth();
-const provider = new firebase.auth.GoogleAuthProvider();
-provider.addScope("profile");
-provider.addScope("email");
-
-// Now you can use CLOUD_NAME and UPLOAD_PRESET
-console.log("Cloudinary Config:", CLOUD_NAME, UPLOAD_PRESET);
-
+const firebaseConfig = {
+    apiKey: "AIzaSyBq5qoIGKWWq8NcVZqD9j_bVBMwvOlxhDY",
+    authDomain: "campusevents-e9eca.firebaseapp.com",
+    projectId: "campusevents-e9eca",
+    storageBucket: "campusevents-e9eca.appspot.com",
+    messagingSenderId: "165313818020",
+    appId: "1:165313818020:web:9278f19425e0aea393a531",
+    measurementId: "G-WYVFFRC5GF"
+  };
+  
+  // Cloudinary Configuration
+  const CLOUD_NAME = "dd3fpzqcu"; // Your Cloudinary cloud name
+  const UPLOAD_PRESET = "vit_events_upload"; // Your Cloudinary upload preset
+  
+  
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+  const auth = firebase.auth();
+  const provider = new firebase.auth.GoogleAuthProvider();
+  provider.addScope('profile'); // Request name access
+  provider.addScope('email'); 
+  
+  
   // Theme Toggle
   const themeToggle = document.getElementById("themeToggle")
   
