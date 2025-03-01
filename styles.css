@@ -201,9 +201,11 @@ header {
 
 header .container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap; /* Allows items to adjust properly */
 }
+
 
 .logo h1 {
   font-size: 1.8rem;
@@ -959,7 +961,9 @@ footer {
   }
 
   .auth-buttons {
-    display: none;
+    display: flex; /* ✅ Keeps the Sign In button visible */
+    justify-content: center;
+    margin-top: 10px;
   }
 
   .hero-content h1 {

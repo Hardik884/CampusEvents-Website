@@ -1,24 +1,15 @@
-const firebaseConfig = {
-    apiKey: "AIzaSyBq5qoIGKWWq8NcVZqD9j_bVBMwvOlxhDY",
-    authDomain: "campusevents-e9eca.firebaseapp.com",
-    projectId: "campusevents-e9eca",
-    storageBucket: "campusevents-e9eca.appspot.com",
-    messagingSenderId: "165313818020",
-    appId: "1:165313818020:web:9278f19425e0aea393a531",
-    measurementId: "G-WYVFFRC5GF"
-  };
-  
-  // Cloudinary Configuration
-  const CLOUD_NAME = "dd3fpzqcu"; // Your Cloudinary cloud name
-  const UPLOAD_PRESET = "vit_events_upload"; // Your Cloudinary upload preset
-  
-  
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
-  const auth = firebase.auth();
-  const provider = new firebase.auth.GoogleAuthProvider();
-  provider.addScope('profile'); // Request name access
-  provider.addScope('email'); 
+import { firebaseConfig, CLOUD_NAME, UPLOAD_PRESET } from "./config.js";
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const auth = firebase.auth();
+const provider = new firebase.auth.GoogleAuthProvider();
+provider.addScope("profile");
+provider.addScope("email");
+
+// Now you can use CLOUD_NAME and UPLOAD_PRESET
+console.log("Cloudinary Config:", CLOUD_NAME, UPLOAD_PRESET);
   
   
   // Theme Toggle
@@ -213,6 +204,7 @@ const firebaseConfig = {
           auth.signInWithPopup(provider).catch((error) => showToast("Error signing in: " + error.message, false));
       }
   });
+  
   
   // Handle Event Creation (Cloudinary Upload)
   document.getElementById("createEventForm").addEventListener("submit", async function (e) {
@@ -510,5 +502,17 @@ const firebaseConfig = {
         modal.style.display = "none";
         document.body.style.overflow = "auto";
     }
-  }
-  
+    }
+
+    // Attach close event listeners to all close buttons
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".close-modal").forEach(button => {
+            button.addEventListener("click", function () {
+                const modal = this.closest(".modal");
+                if (modal) {
+                    modal.style.display = "none";
+                    document.body.style.overflow = "auto";
+                }
+            });
+        });
+    });
