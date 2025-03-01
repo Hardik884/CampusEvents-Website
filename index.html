@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Events Hub</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.0/dist/browser-image-compression.min.js"></script> 
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="logo">
+        <h1>Campus<span>Events</span></h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="#events">Events</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="theme-toggle">
+        <i class="fas fa-sun"></i>
+        <label class="toggle-switch">
+          <input type="checkbox" id="themeToggle">
+          <span class="toggle-slider"></span>
+        </label>
+        <i class="fas fa-moon"></i>
+        </div>
+        <div class="auth-buttons">
+            <button id="authButton" class="btn btn-primary">Sign In</button>
+        </div>
+      <div class="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Discover Amazing Events at VIT Vellore</h1>
+        <p>Stay updated with all the exciting events happening on campus. Register, participate, and make the most of your college experience!</p>
+        <button class="btn btn-primary btn-lg" id="exploreBtn">Explore Events</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="events" class="events-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Upcoming Events</h2>
+        <div class="filter-options">
+          <select id="categoryFilter">
+            <option value="all">All Categories</option>
+            <option value="tech">Technology</option>
+            <option value="cultural">Cultural</option>
+            <option value="sports">Sports</option>
+            <option value="academic">Academic</option>
+          </select>
+          <div class="search-box">
+            <input type="text" id="searchEvents" placeholder="Search events...">
+            <i class="fas fa-search"></i>
+          </div>
+        </div>
+      </div>
+      
+      <div class="events-grid" id="eventsContainer">
+        <!-- Events will be loaded here -->
+      </div>
+      
+      <div class="load-more">
+        <button class="btn btn-outline btn-lg" id="loadMoreBtn">Load More</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="about-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>About Our Events Platform</h2>
+      </div>
+      <div class="about-content">
+        <div class="about-image">
+          <img src="https://images.shiksha.com/mediadata/images/articles/1656193124phpGEPVjU.jpeg" alt="College campus">
+        </div>
+        <div class="about-text">
+          <h3>Your One-Stop Destination for College Events</h3>
+          <p>Our platform connects students with all the exciting events happening around the campus. From technical workshops to cultural festivals, sports tournaments to academic seminars - find everything in one place!</p>
+          <p>We aim to enhance your college experience by making it easier to discover, register, and participate in events that match your interests.</p>
+          <div class="stats">
+            <div class="stat-item">
+              <span class="stat-number">100+</span>
+              <span class="stat-label">Events</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">50,000+</span>
+              <span class="stat-label">Students</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">150+</span>
+              <span class="stat-label">Clubs & Chapters</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Contact Us</h2>
+      </div>
+      <div class="contact-content">
+        <div class="contact-info">
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <h3>Address</h3>
+              <p>VIT, Vellore Campus, Tiruvalam Rd, Tamil Nadu 632014</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <h3>Email</h3>
+              <p>rudra.gupta2023@vitstudent.ac.in</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <div>
+              <h3>Phone</h3>
+              <p>+91 9883210865</p>
+            </div>
+          </div>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="contact-form">
+          <h3>Send us a message</h3>
+          <form id="contactForm">
+            <div class="form-group">
+              <input type="text" id="name" name="name" placeholder="Your Name" required>
+              <span class="error-message" id="nameError"></span>
+            </div>
+            <div class="form-group">
+              <input type="email" id="email" name="email" placeholder="Your Email" required>
+              <span class="error-message" id="emailError"></span>
+            </div>
+            <div class="form-group">
+              <input type="text" id="subject" name="subject" placeholder="Subject" required>
+              <span class="error-message" id="subjectError"></span>
+            </div>
+            <div class="form-group">
+              <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+              <span class="error-message" id="messageError"></span>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <h2>Campus<span>Events</span></h2>
+          <p>Your one-stop destination for all college events.</p>
+        </div>
+        <div class="footer-links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#events">Events</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Support</a></li>
+          </ul>
+        </div>
+        <div class="footer-newsletter">
+          <h3>List Your Event</h3>
+          <p>Want to showcase your event on our platform?</p>
+          <button id="createEventBtn" class="btn btn-primary">Create Event</button>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 CampusEvents. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal" id="createEventModal">
+    <div class="modal-content modal-lg">
+      <span class="close-modal" onclick="closeModal('createEventModal')">&times;</span>
+      <h2>Create New Event</h2>
+      <form id="createEventForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="eventTitle">Event Title</label>
+            <input type="text" id="eventTitle" name="title" required>
+            <span class="error-message" id="eventTitleError"></span>
+          </div>
+          <!-- Add Organizer Name Field -->
+          <div class="form-group">
+            <label for="organizerName">Organizer Name</label>
+            <input type="text" id="organizerName" name="organizerName" required>
+            <span class="error-message" id="organizerNameError"></span>
+          </div>
+          <div class="form-group">
+            <label for="eventCategory">Category</label>
+            <select id="eventCategory" name="category" required>
+              <option value="">Select Category</option>
+              <option value="tech">Technology</option>
+              <option value="cultural">Cultural</option>
+              <option value="sports">Sports</option>
+              <option value="academic">Academic</option>
+            </select>
+            <span class="error-message" id="eventCategoryError"></span>
+          </div>
+        </div>
+        <!-- Update Date Fields -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="startDate">Start Date</label>
+            <input type="date" id="startDate" name="startDate" required>
+            <span class="error-message" id="startDateError"></span>
+          </div>
+          <div class="form-group">
+            <label for="endDate">End Date</label>
+            <input type="date" id="endDate" name="endDate" required>
+            <span class="error-message" id="endDateError"></span>
+          </div>
+        </div>
+
+        <!-- Update Time Fields -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="startTime">Start Time</label>
+            <input type="time" id="startTime" name="startTime" required>
+            <span class="error-message" id="startTimeError"></span>
+          </div>
+          <div class="form-group">
+            <label for="endTime">End Time</label>
+            <input type="time" id="endTime" name="endTime" required>
+            <span class="error-message" id="endTimeError"></span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="eventVenue">Venue</label>
+          <input type="text" id="eventVenue" name="venue" required>
+          <span class="error-message" id="eventVenueError"></span>
+        </div>
+        <div class="form-group">
+            <label for="eventImage">Event Image</label>
+            <input type="file" 
+                id="eventImage" 
+                name="image" 
+                accept="image/*" 
+                required>
+            <span class="error-message" id="eventImageError"></span>
+        </div>
+        <div class="form-group">
+          <label for="eventDescription">Description</label>
+          <textarea id="eventDescription" name="description" rows="4" required></textarea>
+          <span class="error-message" id="eventDescriptionError"></span>
+        </div>
+        <div class="form-group">
+          <label for="eventCapacity">Maximum Capacity</label>
+          <input type="number" id="eventCapacity" name="capacity" min="1" required>
+          <span class="error-message" id="eventCapacityError"></span>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-block">Create Event</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Registration Confirmation Modal -->
+  <div id="registerConfirmModal" class="modal">
+    <div class="modal-content">
+        <h2>Confirm Registration</h2>
+        <p>Are you sure you want to register for this event?</p>
+        <div class="modal-actions">
+            <button id="confirmRegisterBtn" class="btn btn-primary">Yes</button>
+            <button onclick="closeModal('registerConfirmModal')" class="btn btn-outline">No</button>
+        </div>
+    </div>
+  </div>
+
+
+  <!-- Registered Users Modal -->
+  <div id="registeredUsersModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal('registeredUsersModal')">&times;</span>
+        <h2>Registered Users</h2>
+        <ul id="registeredUsersList" class="user-list"></ul>
+    </div>
+  </div>
+
+
+  
+  <div class="toast" id="toast">
+    <div class="toast-content">
+      <i class="fas fa-check-circle toast-icon success"></i>
+      <div class="toast-message">Success message here</div>
+    </div>
+    <div class="toast-progress"></div>
+  </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>   
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
+
