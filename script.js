@@ -1,6 +1,5 @@
 import { firebaseConfig, CLOUD_NAME, UPLOAD_PRESET } from "./config.js";
 
-// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const auth = firebase.auth();
@@ -8,14 +7,11 @@ const provider = new firebase.auth.GoogleAuthProvider();
 provider.addScope("profile");
 provider.addScope("email");
 
-// Now you can use CLOUD_NAME and UPLOAD_PRESET
 console.log("Cloudinary Config:", CLOUD_NAME, UPLOAD_PRESET);
   
   
-  // Theme Toggle
+
   const themeToggle = document.getElementById("themeToggle")
-  
-  // Check for saved theme preference or respect OS preference
   const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)")
   const savedTheme = localStorage.getItem("theme")
   
@@ -24,7 +20,6 @@ console.log("Cloudinary Config:", CLOUD_NAME, UPLOAD_PRESET);
     themeToggle.checked = true
   }
   
-  // Toggle theme when the switch is clicked
   themeToggle.addEventListener("change", function () {
     if (this.checked) {
       document.body.classList.add("dark-mode")
@@ -35,9 +30,8 @@ console.log("Cloudinary Config:", CLOUD_NAME, UPLOAD_PRESET);
     }
   })
   
-  let selectedEventId = null; // Store event ID when clicking register
+  let selectedEventId = null; 
   
-  // Handle Register Button Click (Open Confirmation Modal)
   document.addEventListener("click", function (event) {
       if (event.target.classList.contains("register-btn")) {
           if (!auth.currentUser) {
@@ -49,7 +43,6 @@ console.log("Cloudinary Config:", CLOUD_NAME, UPLOAD_PRESET);
       }
   });
   
-  // Confirm Registration & Store in Firestore
   document.getElementById("confirmRegisterBtn").addEventListener("click", async function () {
       if (!selectedEventId) return;
   
@@ -94,7 +87,6 @@ console.log("Cloudinary Config:", CLOUD_NAME, UPLOAD_PRESET);
       }
   });
   
-  // Update Register Button After Successful Registration
   function updateRegisterButton(eventId) {
       const button = document.querySelector(`.register-btn[data-id="${eventId}"]`);
       if (button) {
@@ -105,7 +97,6 @@ console.log("Cloudinary Config:", CLOUD_NAME, UPLOAD_PRESET);
       }
   }
   
-  // Update "Seats Left" in UI
   async function updateSeatsLeft(eventId) {
       const eventRef = db.collection("events").doc(eventId);
       const eventDoc = await eventRef.get();
@@ -131,9 +122,6 @@ console.log("Cloudinary Config:", CLOUD_NAME, UPLOAD_PRESET);
       }
   }
   
-  
-  
-  // Ensure "Create Event" button opens the modal
   document.addEventListener("DOMContentLoaded", function () {
       const createEventBtn = document.getElementById("createEventBtn");
       const createEventModal = document.getElementById("createEventModal");
@@ -149,7 +137,6 @@ console.log("Cloudinary Config:", CLOUD_NAME, UPLOAD_PRESET);
   });
   
   
-  // Extract Name and Registration Number from VIT Email
   function extractStudentDetails(email) {
       if (!email.endsWith('@vitstudent.ac.in')) return null;
   
@@ -161,7 +148,6 @@ console.log("Cloudinary Config:", CLOUD_NAME, UPLOAD_PRESET);
       return { name: namePart, regNo: regNo };
   }
   
-  // Handle User Authentication
   auth.onAuthStateChanged(async (user) => {
       const authButton = document.getElementById("authButton");
   
@@ -196,7 +182,6 @@ console.log("Cloudinary Config:", CLOUD_NAME, UPLOAD_PRESET);
       }
   });
   
-  // Handle Sign In/Out Button Click
   document.getElementById("authButton").addEventListener("click", () => {
       if (auth.currentUser) {
           auth.signOut().then(() => showToast("Signed out successfully!"));
@@ -205,8 +190,6 @@ console.log("Cloudinary Config:", CLOUD_NAME, UPLOAD_PRESET);
       }
   });
   
-  
-  // Handle Event Creation (Cloudinary Upload)
   document.getElementById("createEventForm").addEventListener("submit", async function (e) {
       e.preventDefault();
       const submitButton = this.querySelector('button[type="submit"]');
@@ -220,7 +203,6 @@ console.log("Cloudinary Config:", CLOUD_NAME, UPLOAD_PRESET);
               return;
           }
   
-          // Extract form values
           const { name, regNo } = extractStudentDetails(auth.currentUser.email);
           const title = document.getElementById("eventTitle").value;
           const category = document.getElementById("eventCategory").value;
@@ -234,7 +216,6 @@ console.log("Cloudinary Config:", CLOUD_NAME, UPLOAD_PRESET);
           const capacity = Number(document.getElementById("eventCapacity").value);
           const imageFile = document.getElementById("eventImage").files[0];
   
-          // Validation
           if (!title || !category || !organizerName || !startDate || !endDate || !startTime || !endTime || !venue || !description || !capacity) {
               showToast("Please fill all event details!", false);
               return;
@@ -250,13 +231,11 @@ console.log("Cloudinary Config:", CLOUD_NAME, UPLOAD_PRESET);
               return;
           }
   
-          // Date formatting
           const formatDate = (dateString) => {
               const date = new Date(dateString);
               return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
           };
   
-          // Upload image to Cloudinary
           const formData = new FormData();
           formData.append('file', imageFile);
           formData.append('upload_preset', UPLOAD_PRESET);
@@ -270,7 +249,6 @@ console.log("Cloudinary Config:", CLOUD_NAME, UPLOAD_PRESET);
           if (!response.ok) throw new Error('Image upload failed');
           const imageData = await response.json();
   
-          // Save event to Firestore
           await db.collection("events").add({
               title,
               category,
@@ -284,7 +262,7 @@ console.log("Cloudinary Config:", CLOUD_NAME, UPLOAD_PRESET);
               capacity,
               registeredUsers: [],
               imageUrl: imageData.secure_url,
-              createdBy: name, // Original user name from VIT email
+              createdBy: name,
               regNo,
               createdAt: firebase.firestore.FieldValue.serverTimestamp()
           });
@@ -302,7 +280,6 @@ console.log("Cloudinary Config:", CLOUD_NAME, UPLOAD_PRESET);
       }
   });
   
-  // Utility Functions
   function showToast(message, isSuccess = true) {
       const toast = document.getElementById("toast");
       const toastIcon = document.querySelector(".toast-icon");
@@ -322,12 +299,23 @@ console.log("Cloudinary Config:", CLOUD_NAME, UPLOAD_PRESET);
       });
   }
   
-  // Load Events When Page is Ready
   document.addEventListener("DOMContentLoaded", function () {
       console.log("Page Loaded: Loading events...");
       loadEvents();
   });
+  const observer = new MutationObserver((mutationsList) => {
+    mutationsList.forEach((mutation) => {
+      document.querySelectorAll('.event-card').forEach(card => {
+        if (card.textContent.includes('Project review')) {
+          card.remove();
+        }
+      });
+    });
+  });
   
+  observer.observe(document.getElementById('eventsContainer'), { childList: true, subtree: true });
+  
+
   function loadEvents() {
       const eventsContainer = document.getElementById("eventsContainer");
   
@@ -346,7 +334,6 @@ console.log("Cloudinary Config:", CLOUD_NAME, UPLOAD_PRESET);
               const currentUser = auth.currentUser;
               let buttonsHTML = '';
   
-              // Calculate remaining seats
               const seatsLeft = event.capacity - (event.registeredUsers ? event.registeredUsers.length : 0);
               const isFull = seatsLeft <= 0;
   
@@ -398,7 +385,6 @@ console.log("Cloudinary Config:", CLOUD_NAME, UPLOAD_PRESET);
               eventsContainer.innerHTML += eventHTML;
           });
   
-          // Attach event listeners for delete buttons
           document.querySelectorAll(".delete-event-btn").forEach(button => {
               button.addEventListener("click", function () {
                   const eventId = this.getAttribute("data-id");
@@ -412,14 +398,11 @@ console.log("Cloudinary Config:", CLOUD_NAME, UPLOAD_PRESET);
   
   async function deleteEvent(eventId, imageUrl) {
       try {
-          // Delete the event from Firestore
           await db.collection("events").doc(eventId).delete();
           showToast("Event deleted successfully!");
   
-          // Extract Cloudinary Public ID
           const publicId = imageUrl.split('/').pop().split('.')[0];
   
-          // Delete image from Cloudinary
           const cloudinaryDeleteUrl = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/destroy`;
           const formData = new FormData();
           formData.append('public_id', publicId);
@@ -442,7 +425,6 @@ console.log("Cloudinary Config:", CLOUD_NAME, UPLOAD_PRESET);
       }
   }
   
-  // Confirm Before Deleting Event
   function confirmDeleteEvent(eventId, imageUrl) {
       const confirmation = confirm("Are you sure you want to delete this event?");
       if (confirmation) {
@@ -450,8 +432,6 @@ console.log("Cloudinary Config:", CLOUD_NAME, UPLOAD_PRESET);
       }
   }
   
-  
-  // Fetch and Display Registered Users
   async function showRegisteredUsers(eventId) {
       try {
           console.log("📌 Fetching registered users for event:", eventId);
@@ -464,7 +444,7 @@ console.log("Cloudinary Config:", CLOUD_NAME, UPLOAD_PRESET);
           }
   
           const userList = document.getElementById("registeredUsersList");
-          userList.innerHTML = ""; // Clear previous data
+          userList.innerHTML = ""; 
   
           eventData.registeredUsers.forEach(user => {
               const userItem = document.createElement("li");
@@ -479,7 +459,6 @@ console.log("Cloudinary Config:", CLOUD_NAME, UPLOAD_PRESET);
       }
   }
   
-  // Attach event listener to "See Registered Users" button
   document.addEventListener("click", function (event) {
       if (event.target.classList.contains("view-users-btn")) {
           const eventId = event.target.getAttribute("data-id");
@@ -504,7 +483,6 @@ console.log("Cloudinary Config:", CLOUD_NAME, UPLOAD_PRESET);
     }
     }
 
-    // Attach close event listeners to all close buttons
     document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll(".close-modal").forEach(button => {
             button.addEventListener("click", function () {

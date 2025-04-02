@@ -1,16 +1,13 @@
-/* Hide scrollbar in WebKit browsers */
 html::-webkit-scrollbar {
-  display: none; /* Hide scrollbar for WebKit browsers */
+  display: none; 
 }
 
-/* Hide scrollbar in Firefox */
+
 html {
-  scrollbar-width: none; /* Hide scrollbar for Firefox */
+  scrollbar-width: none; 
 }
-
-/* Base Styles */
 :root {
-  /* Light Theme (Default) */
+
   --primary-color: #4f46e5;
   --primary-dark: #4338ca;
   --primary-light: #818cf8;
@@ -32,7 +29,6 @@ html {
   --border-radius: 8px;
 }
 
-/* Dark Theme */
 .dark-mode {
   --primary-color: #6366f1;
   --primary-dark: #4f46e5;
@@ -124,7 +120,6 @@ section {
   background-color: var(--primary-color);
 }
 
-/* Update button styles to match Sign In button */
 .btn {
 display: inline-block;
 padding: 10px 16px;
@@ -137,7 +132,6 @@ font-size: 1rem;
 text-align: center;
 }
 
-/* Primary Button (Register Button) */
 .btn-primary {
   background-color: var(--primary-color);
   color: white;
@@ -147,17 +141,15 @@ text-align: center;
   background-color: var(--primary-dark);
 }
 
-/* Secondary Button (Delete Event) */
 .btn-secondary {
   background-color: var(--error-color);
   color: white;
   border: 2px solid var(--error-color);
 }
 .btn-secondary:hover {
-  background-color: #dc2626; /* Darker red */
+  background-color: #dc2626; 
 }
 
-/* Outline Button (See Registered Users) */
 .btn-outline {
   background-color: transparent;
   border: 2px solid var(--primary-color);
@@ -168,7 +160,6 @@ text-align: center;
   color: white;
 }
 
-/* Center buttons inside event cards */
 .event-actions {
   margin-top: 15px;
   display: flex;
@@ -186,7 +177,7 @@ text-align: center;
   width: 100%;
 }
 
-/* Header */
+
 header {
   position: fixed;
   top: 0;
@@ -203,7 +194,7 @@ header .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap; /* Allows items to adjust properly */
+  flex-wrap: wrap; 
 }
 
 
@@ -258,7 +249,6 @@ nav ul li a.active::after {
   color: var(--text-color);
 }
 
-/* Theme Toggle */
 .theme-toggle {
   display: flex;
   align-items: center;
@@ -318,9 +308,7 @@ input:checked + .toggle-slider:before {
   transform: translateX(26px);
 }
 
-/* Hero Section */
 .hero {
-  /* background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url("https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80"); */
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url("https://images.shiksha.com/mediadata/images/1664721059phpQKCqHM.jpeg");
   background-size: cover;
   background-position: center;
@@ -383,7 +371,6 @@ input:checked + .toggle-slider:before {
     color: var(--text-light);
 }
 
-/* Seats Left Styling */
 .seats-left {
   font-size: 1rem;
   font-weight: bold;
@@ -392,7 +379,6 @@ input:checked + .toggle-slider:before {
 }
 
 
-/* Events Section */
 .events-section {
   background-color: var(--background-alt);
 }
@@ -546,7 +532,6 @@ input:checked + .toggle-slider:before {
   margin-top: 50px;
 }
 
-/* About Section */
 .about-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -593,7 +578,6 @@ input:checked + .toggle-slider:before {
   color: var(--text-light);
 }
 
-/* Contact Section */
 .contact-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -644,7 +628,6 @@ input:checked + .toggle-slider:before {
   transform: translateY(-3px);
 }
 
-/* Form Styles */
 .form-group {
   margin-bottom: 20px;
 }
@@ -661,7 +644,6 @@ label {
   font-weight: 500;
   color: var(--text-color);
 }
-/* Add to styles.css */
   .spinner {
     display: inline-block;
     width: 1rem;
@@ -718,7 +700,6 @@ textarea {
   color: var(--text-light);
 }
 
-/* Footer */
 footer {
   background-color: var(--footer-bg);
   color: white;
@@ -788,7 +769,6 @@ footer {
   font-size: 0.9rem;
 }
 
-/* Modal */
 .modal {
   display: none;
   position: fixed;
@@ -849,7 +829,6 @@ footer {
   color: var(--text-color);
 }
 
-/* Toast Notification */
 .toast {
   position: fixed;
   bottom: 20px;
@@ -910,7 +889,6 @@ footer {
   }
 }
 
-/* Responsive Styles */
 @media (max-width: 992px) {
   .about-content,
   .contact-content {
@@ -961,7 +939,7 @@ footer {
   }
 
   .auth-buttons {
-    display: flex; /* ✅ Keeps the Sign In button visible */
+    display: flex; 
     justify-content: center;
     margin-top: 10px;
   }
